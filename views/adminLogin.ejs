@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css files -->
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+    <link rel="stylesheet" href="/stylesheets/admin.css"/>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <!-- js files -->
+    <script src="/javascripts/jquery.js"></script>
+    <script src="/javascripts/scripts.js"></script>
+    <script src="/javascripts/bootstrap.min.js" ></script>
+
+    <title><%= title %></title>
+</head>
+<body>
+ 
+    <div class="container pl pt">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- heading -->
+                <div class="col-md-8">
+                    <h1 class="">ADMIN LOGIN PANEL</h1>
+                </div>
+                <!-- login form -->
+                <div class="col-md-6 pl-form pt-form">
+                    <form action="" method="POST">
+                        <div class="form-group">
+                        <label for="adminInputEmail">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group">
+                        <label for="adminInputPassword">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary form-control">LOGIN</button>
+                        </div>
+                        
+                    </form>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
