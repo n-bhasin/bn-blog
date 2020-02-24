@@ -7,6 +7,9 @@
     "dev": "nodemon ./bin/www",
     "serverstart": "DEBUG=bnblog:* npm run dev"
   },
+  "engine": {
+    "node": "13.7.0"
+  },
   "dependencies": {
     "async": "^3.1.1",
     "bcryptjs": "^2.4.3",
