@@ -32,12 +32,14 @@ exports.blog_detail = function(req, res){
         res.render('blog_detail', {
             title: results.blog.title, 
             blog: results.blog
+            
         })
     });
 }
-exports.blog_list = function(req,res){
+exports.blog_list = function(req,res, next){
     
     Blog.find({}, 'title author description written_date')
+        .sort('-written_date')
         .populate('author')
         .exec(function(err, list_books){
             if(err) return next(err);

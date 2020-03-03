@@ -6,6 +6,7 @@ var blogpostSchema = new Schema(
     {
         title: {type: String, required: true},
         author: {type: Schema.Types.ObjectId, ref: 'Admin', required: true}, //reference to associated admini
+        //preview: {type: String, required: true, maxlength: 200},
         description: {type: String, required: true},
         written_date: {type: Date, default: Date.now}
         

@@ -49,11 +49,13 @@ exports.admin_post = function(req, res, next){
     passport.authenticate('local', {
         successRedirect: '/admin/home',
         failureRedirect: '/admin',
+        failureFlash: true
     })(req, res, next);
 
 };
 
 exports.admin_logout = function(req,res, next){
     req.logout();
+    req.flash('success_msg', "You're successfully logged out.");
     res.redirect('/admin');
 }

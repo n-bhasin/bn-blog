@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
+var flash = require('connect-flash');
 
 
 var indexRouter = require('./routes/index');
@@ -36,8 +37,19 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
+//passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+//connect-flash
+app.use(flash());
+
+//Global vars
+app.use((req,res,next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

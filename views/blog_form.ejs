@@ -84,13 +84,15 @@
                         <%}%>
                         >
                     </div>
-
+                    <p>
+                        <%- include('error') %>    
+                    </p>
                     <div class="form-group">
                         <label for="writter">Written By:</label>
                         <select class="form-control" id="writterby" name="admin">
                             <% admin.forEach(function(el, index){  %>
                                 <option value= <%= el._id %> >
-                                    <%= el.email %>
+                                    <%= el.name %>
                                 </option>
                                
                             <% }) %>

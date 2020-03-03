@@ -15,7 +15,15 @@ p {
     line-height: 1.7em;
     color: #212529;
 }
-
+.mt-20{
+    margin-top: 20px;
+}
+.mt-30{
+    margin-top: 30px;
+}
+.mt-40{
+    margin-top: 40px;
+}
 a,
 a:hover,
 a:focus {
@@ -39,6 +47,9 @@ a:focus {
     border-radius: 0;
     margin-bottom: 40px;
     box-shadow: -4px 1px 25px rgba(0, 0, 0,0.2)
+}
+.data-showbox{
+    border-radius: 10px;
 }
 .navbar-btn {
     box-shadow: none;
