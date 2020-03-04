@@ -108,7 +108,7 @@
                                 <td><a href="<%= el.url%>">
                                         <%= el.title %></a> </td>
                                 <td><a href="<%= el.url%>">
-                                        <%= el.description %></a></td>
+                                        <%= el.description.split("." , 2)[0] %> .<%= el.description.split("." , 2)[1] %> .</a></td>
                                 <td> <%= el.author.name%></td>
                                 <td><%= el.written_date_formatted %></td>
                             </tr>

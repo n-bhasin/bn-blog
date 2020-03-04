@@ -6,7 +6,6 @@ var blogpostSchema = new Schema(
     {
         title: {type: String, required: true},
         author: {type: Schema.Types.ObjectId, ref: 'Admin', required: true}, //reference to associated admini
-        //preview: {type: String, required: true, maxlength: 200},
         description: {type: String, required: true},
         written_date: {type: Date, default: Date.now}
         
@@ -19,6 +18,13 @@ blogpostSchema
 .virtual('url')
 .get(function(){
     return '/admin/blog/' + this._id;
+});
+
+//forntend url
+blogpostSchema
+.virtual('user_blog_url')
+.get(function(){
+    return '/blog/' + this._id;
 });
 
 blogpostSchema

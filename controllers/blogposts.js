@@ -36,6 +36,36 @@ exports.blog_detail = function(req, res){
         })
     });
 }
+// frontend user blog detail page
+exports.user_blog_detail = function(req, res, next){
+    
+    async.parallel({
+
+        blog: function(callback){
+            Blog.findById(req.params.id)
+                .populate('author')
+                .exec(callback)
+        },
+        // blog_post: function(callback){
+        //     BookInstance.find({'book': req.params.id})
+        //     .exec(callback)
+        // },
+    }, function(err, results){
+        if(err) return next(err);
+        if(results.blog==null){
+            var err = new Error('Blog Post Not Found');
+            err.status = 404;
+            return next(err);
+        }
+        //success
+        res.render('userView/user_blogpost_detail', {
+            title: results.blog.title, 
+            blog: results.blog
+            
+        })
+    });
+}
+
 exports.blog_list = function(req,res, next){
     
     Blog.find({}, 'title author description written_date')
@@ -45,6 +75,34 @@ exports.blog_list = function(req,res, next){
             if(err) return next(err);
             //success
             res.render('blog_list', {title: 'All Blog Posts', book_list:list_books});
+        });
+};
+
+//frontend user blog list
+exports.user_blog_list = function(req,res, next){
+    
+    Blog.find({}, 'title author description written_date')
+        .sort('-written_date')
+        .limit(4)
+        .populate('author')
+        .exec(function(err, list_books){
+            if(err) return next(err);
+            //success
+            res.render('index', {title: 'All Blog Posts', book_list:list_books});
+        });
+};
+
+//frontend user blog list ofall posts
+exports.user_blog_list_allposts = function(req,res, next){
+    
+    Blog.find({}, 'title author description written_date')
+        .sort('-written_date')
+        .populate('author')
+        .exec(function(err, list_books){
+            if(err) return next(err);
+            //success
+            res.render('userView/user_blogallposts', 
+            {book_list:list_books});
         });
 };
 

@@ -14,9 +14,9 @@ var BlogModel = require('../models/blogposts');
 var UserModel = require('../models/user');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'BN BLOG' });
-});
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'BN BLOG' });
+// });
 
 ///ADMIN URL///
 
@@ -67,7 +67,19 @@ router.get('/admin/blog/:id/delete', ensureAuthenticated,BlogPost.blog_delete_ge
 router.post('/admin/blog/:id/delete',ensureAuthenticated, BlogPost.blog_delete_post)
 
 /** Frontend */
-///user loginform frontend get ///
-router.get('/user/login', User.user_get)
-router.get('/user/login', User.user_get)
+/// blog list get ///
+router.get('/', BlogPost.user_blog_list)
+/// list of all blogs using pagination///
+router.get('/blog/allposts', BlogPost.user_blog_list_allposts)
+/// blog detail get///
+router.get('/blog/:id', BlogPost.user_blog_detail)
+///user loginform get ///
+router.get('/user/login', User.user_login_get)
+///user loginform post ///
+router.post('/user/login', User.user_login_post)
+///user registerform get ///
+router.get('/user/register', User.user_register_get)
+///user registerform post ///
+router.post('/user/register', User.user_register_post)
+
 module.exports = router;

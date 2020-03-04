@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css files -->
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+    <link rel="stylesheet" href="/stylesheets/admin.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- js files -->
+    <script src="/javascripts/jquery.js"></script>
+    <script src="/javascripts/scripts.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <!-- REVEAL TEMPLATE BEGINING-->
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700"
+        rel="stylesheet">
+
+
+    <!-- stylesheets/SS Files -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/animate.min.css" rel="stylesheet">
+    <link href="/stylesheets/ionicons.min.css" rel="stylesheet">
+    <link href="/stylesheets/magnific-popup.css" rel="stylesheet">
+    <!-- Main Stylesheet File -->
+
+
+    <!-- =======================================================
+  Theme Name: Reveal
+  Theme URL: https://bootstrapmade.com/reveal-bootstrap-corporate-template/
+  Author: BootstrapMade.com
+  License: https://bootstrapmade.com/license/
+======================================================= -->
+    <!-- REVEAL TEMPLATE ENDING-->
+
+    <!--==========================
+    Header
+  ============================-->
+    <header id="header">
+        <div class="container">
+
+            <div id="logo" class="pull-left">
+                <h1><a href="#body" class="scrollto">The BN<span>BLOG</span></a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
+            </div>
+
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="#body">Home</a></li>
+                    <li><a href="/#Posts">Posts</a></li>
+                    <li><a href="/#team">Team</a></li>
+                    <li><a href="/user/login">Log In</a></li>
+                </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </header><!-- #header -->
+
+    <main id="main">
+
+        <!--==========================
+      Posts Section
+    ============================-->
+        <section id="Posts">
+            <div class="container">
+                  <!-- ibm bg image -->
+                <div class="section-header" style="background-image: url('/images/blog_detailbg.jpg');
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        min-height:300px;">
+                    <h1 style="color:#fff; padding-top: 50px; padding-right:500px; padding-left: 50px;"><%= title%></h1>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="container blog_detail " style="margin-top: 30px; padding: 30px;">
+                        <div class="col-md-12">
+                            <h1><%= title%></h1>
+                            <medium>
+                                <span><b>Author: </b> <%= blog.author.name %></span> | <span><b>Published On:</b>
+                                    <%= blog.written_date_formatted %></span>
+                            </medium>
+                            <hr>
+                            <p class="text-justify">
+                                <%= blog.description%>
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="section-header blog_detail">
+                    <div class="col-md-12">
+                        <form action="" method="POST">
+                            <div class="form-group">
+                                <label for="blogDescription" style="font-size: 18px;"><b>Pour your valuable Comments</b>
+                                </label>
+                                <textarea class="form-control" id="blogDescription" name="description"
+                                    rows="4"> </textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"
+                                    style="background-color: #0C2E8A; letter-spacing:1px; font-size: 18px;">
+                                    COMMENT</button>
+                            </div>
+                        </form>
+                    </div>
+                    </button>
+
+
+                </div>
+
+            </div>
+        </section><!-- #Posts -->
+
+    </main>
+
+    <!--==========================
+    Footer
+  ============================-->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong> BNBLOG </strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!--
+          All the links in the footer should remain intact.
+          You can delete the links only if you purchased the pro version.
+          Licensing information: https://bootstrapmade.com/license/
+          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Reveal
+        -->
+                <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+            </div>
+        </div>
+    </footer><!-- #footer -->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="/javascripts/jquery-migrate.min.js"></script>
+    <script src="/javascripts/bootstrap.bundle.min.js"></script>
+    <script src="/javascripts/easing.min.js"></script>
+    <script src="/javascripts/hoverIntent.js"></script>
+    <script src="/javascripts/superfish.min.js"></script>
+    <script src="/javascripts/wow.min.js"></script>
+    <script src="/javascripts/magnific-popup.min.js"></script>
+    <script src="/javascripts/sticky.js"></script>
+
+    <!-- Contact Form JavaScript 
+  <!-- Template Main Javascript File -->
+    <script src="/javascripts/main.js"></script>
+
+    </body>
+
+</html>
+
+</body>
+
+</html>
