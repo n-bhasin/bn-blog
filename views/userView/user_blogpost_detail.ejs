@@ -79,14 +79,12 @@
         background-attachment: scroll;
         min-height:300px;">
                     <h1 style="color:#fff; padding-top: 50px; padding-right:500px; padding-left: 50px;"><%= title%></h1>
-
+                <%- include('../error') %>
                 </div>
-
                 <div class="row">
-
                     <div class="container blog_detail " style="margin-top: 30px; padding: 30px;">
                         <div class="col-md-12">
-                            <h1><%= title%></h1>
+                            <h1><%= blog.title %></h1>
                             <medium>
                                 <span><b>Author: </b> <%= blog.author.name %></span> | <span><b>Published On:</b>
                                     <%= blog.written_date_formatted %></span>
@@ -104,18 +102,35 @@
                 <div class="section-header blog_detail">
                     <div class="col-md-12">
                         <form action="" method="POST">
-                            <div class="form-group">
-                                <label for="blogDescription" style="font-size: 18px;"><b>Pour your valuable Comments</b>
-                                </label>
-                                <textarea class="form-control" id="blogDescription" name="description"
-                                    rows="4"> </textarea>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="blogDescription" style="font-size: 18px;"><b>Pour your valuable Comments</b>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="blogDescription" style="font-size: 18px;"><b></b>
+                                    </label>
+                                    <input type="text" name="first_name" class="form-control" placeholder="First Name">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="hidden" value="<%=blog._id%>" name="blog_id">
+                                    <label for="blogDescription" style="font-size: 18px;"><b></b>
+                                    </label>
+                                    <input type="text" name="last_name" class="form-control" placeholder="Last name">
+                                </div>
+                                
                             </div>
-
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary"
-                                    style="background-color: #0C2E8A; letter-spacing:1px; font-size: 18px;">
-                                    COMMENT</button>
-                            </div>
+                                    <label for="blogDescription" style="font-size: 18px;"><b></b>
+                                    </label>
+                                    <textarea class="form-control" id="blogDescription" name="description"
+                                        rows="4" required placeholder="Type your comment"></textarea>
+                                </div>
+    
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary"
+                                        style="background-color: #0C2E8A; letter-spacing:1px; font-size: 18px;">
+                                        COMMENT</button>
+                                </div>
                         </form>
                     </div>
                     </button>

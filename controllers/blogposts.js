@@ -1,6 +1,7 @@
 var Admin = require('../models/admin');
 var Blog = require('../models/blogposts');
 var User = require('../models/user');
+var Comment = require('../models/comment');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
@@ -46,6 +47,11 @@ exports.user_blog_detail = function(req, res, next){
                 .populate('author')
                 .exec(callback)
         },
+        comment: function(callback){
+            User.findById(req.params.id)
+                .populate('posts')
+                .exec(callback)
+        },
         // blog_post: function(callback){
         //     BookInstance.find({'book': req.params.id})
         //     .exec(callback)
@@ -66,6 +72,9 @@ exports.user_blog_detail = function(req, res, next){
     });
 }
 
+//user blog comment post
+// 
+//backend blog list
 exports.blog_list = function(req,res, next){
     
     Blog.find({}, 'title author description written_date')
@@ -123,7 +132,7 @@ exports.blog_create_post = [
     // Validate fields.
     body('title', 'Title must not be empty.').isLength({ min: 1 }).trim(),
     body('admin', 'Author must not be empty.').isLength({ min: 1 }).trim(),
-    body('description', 'Summary must not be empty.').isLength({ min: 1 }).trim(),
+    body('description', 'Summary must not be empty.').isLength({ min: 1 }),
     body('written_date', 'Invalid date').optional({ checkFalsy: true }).isISO8601(),
     // Sanitize fields (using wildcard).
     sanitizeBody('*').escape(),
@@ -295,3 +304,58 @@ exports.blog_delete_post = function(req, res){
         }
     });
 }
+
+////comments///
+exports.user_comment = [
+
+    // Validate fields.
+    body('first_name').isLength({ min: 1 }).trim().withMessage('First name must be specified.')
+        .isAlpha().withMessage('Invalid name.'),
+    body('last_name').isLength({ min: 1 }).trim().withMessage('First name must be specified.')
+        .isAlpha().withMessage('Invalid name.'),
+    body('description').isLength({ min: 1 }).withMessage('Comment should not be empty'),
+    // Sanitize fields.
+    sanitizeBody('first_name').escape(),
+    sanitizeBody('last_name').escape(),
+    sanitizeBody('description').escape(),
+
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+        var usercomment = new User(
+            {
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                comment: req.body.description,
+                posts: req.body.blog_id
+            });
+            console.log(usercomment);
+        if (!errors.isEmpty()) {
+            // There are errors. Render form again with sanitized values/errors messages.
+            
+            async.parallel({
+                userid: function(callback){
+                    User.find(callback);
+                },
+            })
+            req.flash('error_msg', JSON.stringify(errors.array()));
+            console.log(JSON.stringify(errors.array()));
+            res.render('userView/user_blogpost_detail', {errors: errors.array() })
+            return;
+        }
+        else {
+            // Data from form is valid.
+
+            // Create an Author object with escaped and trimmed data.
+            
+            usercomment.save(function (err) {
+                if (err) { return next(err); }
+                // Successful - redirect to new author record.
+                req.flash('success_msg', 'Thanks for your comment!,submitted successfully.')
+                res.render('userView/user_blogpost_detail');
+            });
+        }
+    }
+];

@@ -3,7 +3,7 @@ var localStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 var passport = require('passport');
-const validator = require('express-validator');
+const {check, validationResult} = require('express-validator/check');
 
 exports.user_login_get = function(req, res){
     res.render('userView/user_login' , {title: "USER LOGIN PANEL"});
@@ -61,45 +61,57 @@ exports.user_register_get = function(req, res){
 exports.user_register_post = [
 
     //validate the name field
-    validator.body('first_name', 'first name is required!').isLength({min: 1}).trim(),
-    validator.body('last_name', 'last name is required!').isLength({min: 1}).trim(),
-    validator.body('email', 'email is required!').isLength({min: 1}).trim(),
-    validator.body('password', 'password is required!').isLength({min: 1}).trim(),
+    check('first_name', 'first name is required!').isLength({min: 1}).isAlpha().trim()
+    .withMessage('Invalid characters in nam field'),
+    check('last_name', 'last name is required!').isLength({min: 1}).isAlpha().trim()
+    .withMessage('Invalid characters in name field'),
+    check('email', 'email is required!').isEmail().trim(),
+    check('password', 'password is required!').isLength({min: 1}).trim(),
     //sanitize the name field
-    validator.sanitizeBody('*').escape(),
+    
 
     //process the request
     (req, res,next) => {
-
-        const errors = validator.validationResult(req);
-
+        const errors = validationResult(req);
+        
+        const {first_name, last_name, email, password} = req.body;
         var newUser = new User({
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            email: req.body.email,
-            password: req.body.password
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            password: password
         });
 
-        if(!errors.isEmpty()){
-            res.render('user/register', {title: 'Register', user: newUser, errors: errors.array()});
-            return ;
+
+        if(!errors.isEmpty()){  
+            req.flash('error_msg', JSON.stringify(errors.array()[1]["msg"]));        
+            res.redirect('register');
+            return;
         }
 
         else{
             //data validated
-
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(newUser.password, salt, (err, hash) => {
-                    if(err) return next(err);
-                    newUser.password = hash;
-
-                    newUser.save(function(err){
-                        if(err) return next(err);
-                        req.flash('success_msg', "You're successfully logged in.");
-                        res.redirect('/');
-                    })
-                })
-            })
+            User.findOne({email: email})
+                .then(user => {
+                    if(user){
+                        req.flash('error_msg', 'Email is already registered.');
+                        res.redirect('register');
+                    }
+                    else{
+                        bcrypt.genSalt(10, (err, salt) => {
+                            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                                if(err) return next(err);
+                                newUser.password = hash;
+            
+                                newUser.save(function(err){
+                                    if(err) return next(err);
+                                    req.flash('success_msg', "You're successfully logged in.");
+                                    res.redirect('/');
+                                })
+                            })
+                        })
+                    }
+                });
         }
     }
 ]
@@ -109,3 +121,4 @@ exports.user_logout = function(req,res, next){
     req.flash('success_msg', "You're successfully logged out.");
     res.redirect('/');
 }
+

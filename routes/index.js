@@ -73,13 +73,15 @@ router.get('/', BlogPost.user_blog_list)
 router.get('/blog/allposts', BlogPost.user_blog_list_allposts)
 /// blog detail get///
 router.get('/blog/:id', BlogPost.user_blog_detail)
+/// blog detail get///
+router.post('/blog/:id', BlogPost.user_comment)
 ///user loginform get ///
-router.get('/user/login', User.user_login_get)
+// router.get('/user/login', User.user_login_get)
 ///user loginform post ///
-router.post('/user/login', User.user_login_post)
+// router.post('/user/login', User.user_login_post)
 ///user registerform get ///
-router.get('/user/register', User.user_register_get)
+// router.get('/user/register', User.user_register_get)
 ///user registerform post ///
-router.post('/user/register', User.user_register_post)
+router.post('/user/register', BlogPost.user_comment)
 
 module.exports = router;
