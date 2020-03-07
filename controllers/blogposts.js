@@ -18,10 +18,7 @@ exports.blog_detail = function(req, res){
                 .populate('author')
                 .exec(callback)
         },
-        // blog_post: function(callback){
-        //     BookInstance.find({'book': req.params.id})
-        //     .exec(callback)
-        // },
+        
     }, function(err, results){
         if(err) return next(err);
         if(results.blog==null){
@@ -341,21 +338,40 @@ exports.user_comment = [
                 },
             })
             req.flash('error_msg', JSON.stringify(errors.array()));
-            console.log(JSON.stringify(errors.array()));
+           // console.log(JSON.stringify(errors.array()));
             res.render('userView/user_blogpost_detail', {errors: errors.array() })
             return;
         }
         else {
             // Data from form is valid.
+            async.parallel({
+                blog: function(callback){
+                    Blog.findById(req.params.id)
+                        .populate('author')
+                        .exec(callback)
 
-            // Create an Author object with escaped and trimmed data.
-            
-            usercomment.save(function (err) {
+                },
+                
+            },function(err, results) {
+                console.log(results)
                 if (err) { return next(err); }
-                // Successful - redirect to new author record.
-                req.flash('success_msg', 'Thanks for your comment!,submitted successfully.')
-                res.render('userView/user_blogpost_detail');
+    
+                if (results.blog==null) { // No results.
+                    var err = new Error('post not found');
+                    err.status = 404;
+                    return next(err);
+                }
+                console.log(results.author);
+                usercomment.save(function (err) {
+                    if (err) { return next(err); }
+                    // Successful - redirect to new author record.
+                    
+                    res.render('userView/user_blogpost_detail', {blog: results.blog});
+                });
+               
             });
+            // Create an Author object with escaped and trimmed data.
         }
+        req.flash('success_msg', 'Thanks for your comment!,submitted successfully.')
     }
 ];
