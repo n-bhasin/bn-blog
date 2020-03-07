@@ -1,0 +1,6 @@
+frontend-url: http://bn-blog.herokuapp.com/
+backend-url: http://bn-blog.herokuapp.com/admin
+
+/***login details****/
+    email: admin@bnblog.com
+    password: neeraj
