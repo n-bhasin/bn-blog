@@ -26,7 +26,7 @@ router.get('/admin', Admin.admin_get)
 ///admin login post url///
 router.post('/admin', Admin.admin_post);
 ///admin dashboard url///
-router.get('/admin/home', ensureAuthenticated, function(req,res){
+router.get('/admin/home', ensureAuthenticated, function(req,res, next){
  
     async.parallel({
       blog_post_count: function(callback) {
@@ -39,11 +39,17 @@ router.get('/admin/home', ensureAuthenticated, function(req,res){
       admin: function(callback) {
         AdminModel.countDocuments({}, callback);
     },
-      
+      userposts: function(callback){
+        UserModel.find(callback)
+        .sort('-_id')
+      }
   }, function(err, results) {
-      res.render('home', { title: 'BN Blog', error: err, data: results, currentUser: req.user.name});
-  });
-
+      console.log(err);
+      req.flash('success_msg', 'You logged in successfully!')
+      res.render('home', { title: 'BN Blog', comments: results.userposts, data: results, currentUser: req.user.name});
+  }, 
+  );
+  
 })
 ///admin logout///
 router.get('/admin/logout', ensureAuthenticated,Admin.admin_logout);

@@ -58,7 +58,7 @@
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
-
+                    <%- include('./error') %>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <h1 style="padding-left: 20px;"> Welcome <%= currentUser %></h1>
                         <!-- <ul class="nav navbar-nav ml-auto">
@@ -108,7 +108,7 @@
             <div class="container mt-40">
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" style="overflow-x: scroll;">
                             <thead>
                                 <th>Sr No.</th>
                                 <th>Name</th>
@@ -116,7 +116,18 @@
                                 <th>Blog Post ID</th>
                             </thead>
                             <tbody>
-
+                                <% comments.forEach(function(el, index){%>
+                                    <tr>
+                                        
+                                        <td><%if(index == 0) { index = 1%>
+                                            <%= index%><%}else{ %><%= index+1%><%}%>
+                                        </td>
+                                        <td><%= el.first_name %>  <%= el.last_name %></td>
+                                        <td><%= el.comment%></td>
+                                        <td><%= el.posts%></td>
+                                    </tr>
+        
+                                    <% })%>
                             </tbody>
                         </table>
                     </div>

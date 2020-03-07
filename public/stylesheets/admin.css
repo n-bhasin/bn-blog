@@ -22,3 +22,30 @@
 .pl-form{
     padding-left: 38px;
 }
+
+@media (max-width:768px){
+    .pl{
+        padding-left: 105px !important;
+    }
+}
+@media (max-width:684px){
+    .pl{
+        padding-left: 30px !important;
+    }
+}
+@media (max-width:414px){
+    .pl{
+        padding-left: 0px !important;
+    }
+}
+@media (max-width:375px){
+    .pl{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
+@media (max-width:335px){
+    .pl{
+        padding-left: 0px !important;
+    }
+}

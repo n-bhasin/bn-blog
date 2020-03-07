@@ -90,10 +90,10 @@
                 </h1>
 
                 <div class="container" style="margin-top: 30px;">
-                    <table class="table table-bordered" style="overflow: scroll; border-color: #333333;">
+                    <table class="table table-bordered" style="overflow-x: scroll; border-color: #333333;">
                         <thead>
                             <tr>
-                                <!-- <th></th> -->
+                                <th>Sr No.</th>
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Author</th>
@@ -104,11 +104,14 @@
                             <% book_list.forEach(function(el, index){%>
                             <tr>
                                 <!-- <th><input type="checkbox" id="deleteCheckId" value="<%= el._id %>" class="deleteCheckbox" name="checkpost"> -->
-                                </th>
+                                <!-- </th> -->
+                                <td><%if(index == 0) { index = 1%>
+                                    <%= index%><%}else{ %><%= index+1%><%}%>
+                                </td>
                                 <td><a href="<%= el.url%>">
                                         <%= el.title %></a> </td>
-                                <td><a href="<%= el.url%>">
-                                        <%= el.description.split("." , 2)[0] %> .<%= el.description.split("." , 2)[1] %> .</a></td>
+                                <td style="overflow-y: scroll;" ><a href="<%= el.url%>">
+                                        <%= el.description.split("." , 2)[0] %>..... <span style="color: #7386D5;">CONTINUE READING</span>  %> .</a></td>
                                 <td> <%= el.author.name%></td>
                                 <td><%= el.written_date_formatted %></td>
                             </tr>

@@ -366,12 +366,13 @@ exports.user_comment = [
                     if (err) { return next(err); }
                     // Successful - redirect to new author record.
                     
-                    res.render('userView/user_blogpost_detail', {blog: results.blog});
+                    res.redirect(results.blog._id);
                 });
                
             });
             // Create an Author object with escaped and trimmed data.
         }
-        req.flash('success_msg', 'Thanks for your comment!,submitted successfully.')
+        req.flash('success_msg', 'Thanks! for your comment. Submitted successfully.')
     }
 ];
+
