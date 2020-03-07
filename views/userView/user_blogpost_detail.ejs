@@ -78,13 +78,16 @@
         background-repeat: no-repeat;
         background-attachment: scroll;
         min-height:300px;">
-                    <h1 style="color:#fff; padding-top: 50px; padding-right:500px; padding-left: 50px;"><%= title%></h1>
-                <%- include('../error') %>
+                    <h1 style="color:#fff; padding-top: 50px; padding-right:500px; padding-left: 50px;">
+                        <%= blog.title%>
+                    </h1>
+               
                 </div>
                 <div class="row">
                     <div class="container blog_detail " style="margin-top: 30px; padding: 30px;">
+                        <%- include('../error') %>
                         <div class="col-md-12">
-                            <h1><%= blog.title %></h1>
+                            <!-- <h1></h1> -->
                             <medium>
                                 <span><b>Author: </b> <%= blog.author.name %></span> | <span><b>Published On:</b>
                                     <%= blog.written_date_formatted %></span>
