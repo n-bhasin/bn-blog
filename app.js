@@ -15,7 +15,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 //server connection
-var dev_db_url = 'mongodb+srv://local_library_user:local_library@cluster0-nhau9.azure.mongodb.net/bn-blog?retryWrites=true&w=majority';
+var dev_db_url = /** ENTER YOUR OWN URL IN SINGE QUOTES AND END WITH SEMICOLON*/
 var mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, {useNewUrlParser: true});
 var db = mongoose.connection;
